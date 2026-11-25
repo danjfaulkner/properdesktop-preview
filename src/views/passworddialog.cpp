@@ -12,9 +12,9 @@
 #include "ui/text_field.h"
 #include "ui/window.h"
 
-using namespace cutefish;
-using cutefish::i18n::format;
-using cutefish::i18n::tr;
+using namespace properdesktop;
+using properdesktop::i18n::format;
+using properdesktop::i18n::tr;
 
 class PasswordDialog::Content : public ui::ColumnLayout
 {

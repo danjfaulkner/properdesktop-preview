@@ -15,7 +15,7 @@
 #include <fstream>
 #include <sstream>
 
-using cutefish::ui::Application;
+using properdesktop::ui::Application;
 
 TEST(ImageSequenceTest, AFolderIsItsImagesInNumericOrder)
 {
@@ -156,7 +156,7 @@ TEST(PreviewSettingsTest, SidebarAndRecentFilesAreKept)
 
 TEST(DesktopEntryTest, ClaimsTheImageTypesAndPdf)
 {
-    std::ifstream file(PREVIEW_SOURCE_DIR "/cutefish-preview.desktop");
+    std::ifstream file(PREVIEW_SOURCE_DIR "/properdesktop-preview.desktop");
     std::string line;
     std::string types;
     while (std::getline(file, line)) {
@@ -164,7 +164,7 @@ TEST(DesktopEntryTest, ClaimsTheImageTypesAndPdf)
             types = line.substr(9);
     }
     std::string expected;
-    for (const std::string& type : cutefish::ui::imageMimeTypes())
+    for (const std::string& type : properdesktop::ui::imageMimeTypes())
         expected += type + ";";
     EXPECT_EQ(types, expected + "application/pdf;");
 }

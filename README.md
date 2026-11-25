@@ -1,6 +1,6 @@
 # Preview
 
-The image and PDF viewer of Cutefish Desktop. It opens an image with the
+The image and PDF viewer of Proper Desktop. It opens an image with the
 other images of its folder, steps through them from the keyboard, the arrows
 or a swipe, and zooms and pans with the pointer, the touchpad or the keys,
 with thumbnails in a sidebar and a full screen view. A PDF scrolls as one
@@ -9,7 +9,7 @@ search, text selection and links.
 
 ## Dependencies
 
-Preview uses cutefish-toolkit and cutefish-framework; GoogleTest for the
+Preview uses properdesktop-toolkit and properdesktop-framework; GoogleTest for the
 tests.
 
 ```sh

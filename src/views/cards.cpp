@@ -16,9 +16,9 @@
 #include <cmath>
 #include <cstdint>
 
-using namespace cutefish::ui;
-using cutefish::i18n::format;
-using cutefish::i18n::tr;
+using namespace properdesktop::ui;
+using properdesktop::i18n::format;
+using properdesktop::i18n::tr;
 
 static constexpr double kButtonSize = 28;
 static constexpr double kFieldHeight = 32;

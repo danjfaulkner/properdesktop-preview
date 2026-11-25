@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: cutefish-preview\n"
-"Report-Msgid-Bugs-To: https://github.com/cutefishos\n"
+"Project-Id-Version: properdesktop-preview\n"
+"Report-Msgid-Bugs-To: https://github.com/danjfaulkner\n"
 "POT-Creation-Date: 2026-11-13 18:50+0800\n"
 "PO-Revision-Date: 2026-11-13 12:00+0800\n"
 "Last-Translator: \n"
@@ -75,7 +75,7 @@ msgstr "Нет совпадений"
 msgid "{index} of {count}"
 msgstr "{index} из {count}"
 
-#: src/views/previewwindow.cpp cutefish-preview.desktop
+#: src/views/previewwindow.cpp properdesktop-preview.desktop
 msgid "Preview"
 msgstr "Просмотр"
 
@@ -128,7 +128,7 @@ msgstr "Копировать ссылку"
 msgid "Select All"
 msgstr "Выбрать все"
 
-#: src/views/previewwindow.cpp cutefish-preview.desktop
+#: src/views/previewwindow.cpp properdesktop-preview.desktop
 msgid "View images and PDF documents"
 msgstr "Просмотр изображений и документов PDF"
 
@@ -373,6 +373,6 @@ msgstr "Недавние"
 msgid "Clear"
 msgstr "Очистить"
 
-#: cutefish-preview.desktop
+#: properdesktop-preview.desktop
 msgid "Image;Picture;Photo;Viewer;PDF;Document;"
 msgstr "Изображение;Картинка;Фото;Фотография;Просмотр;Просмотрщик;PDF;Документ;Image;Viewer;"

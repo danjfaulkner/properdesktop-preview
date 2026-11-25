@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: cutefish-preview\n"
-"Report-Msgid-Bugs-To: https://github.com/cutefishos\n"
+"Project-Id-Version: properdesktop-preview\n"
+"Report-Msgid-Bugs-To: https://github.com/danjfaulkner\n"
 "POT-Creation-Date: 2026-11-13 18:50+0800\n"
 "PO-Revision-Date: 2026-11-13 17:03+0800\n"
 "Last-Translator: \n"
@@ -75,7 +75,7 @@ msgstr "无匹配项"
 msgid "{index} of {count}"
 msgstr "第 {index} 个，共 {count} 个"
 
-#: src/views/previewwindow.cpp cutefish-preview.desktop
+#: src/views/previewwindow.cpp properdesktop-preview.desktop
 msgid "Preview"
 msgstr "预览"
 
@@ -128,7 +128,7 @@ msgstr "复制链接"
 msgid "Select All"
 msgstr "全选"
 
-#: src/views/previewwindow.cpp cutefish-preview.desktop
+#: src/views/previewwindow.cpp properdesktop-preview.desktop
 msgid "View images and PDF documents"
 msgstr "查看图像和 PDF 文档"
 
@@ -373,6 +373,6 @@ msgstr "最近使用"
 msgid "Clear"
 msgstr "清除"
 
-#: cutefish-preview.desktop
+#: properdesktop-preview.desktop
 msgid "Image;Picture;Photo;Viewer;PDF;Document;"
 msgstr "Image;Picture;Photo;Viewer;PDF;Document;图像;图片;照片;看图;查看器;文档;"

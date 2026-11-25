@@ -15,7 +15,7 @@
 #include <string>
 #include <vector>
 
-namespace cutefish::ui {
+namespace properdesktop::ui {
 class AboutDialog;
 class Animation;
 class FileChooser;
@@ -49,7 +49,7 @@ public:
     PreviewWindow(const PreviewWindow&) = delete;
     PreviewWindow& operator=(const PreviewWindow&) = delete;
 
-    cutefish::ui::Window& window() const { return *m_window; }
+    properdesktop::ui::Window& window() const { return *m_window; }
     bool isWelcome() const { return !m_sequence; }
     // The file on screen; empty on the welcome page.
     std::string currentPath() const;
@@ -103,16 +103,16 @@ public:
     std::string positionText() const;
     std::string titleText() const;
     double chromeOpacity() const { return m_chromeOpacity; }
-    cutefish::ui::View* sidebarButton() const;
-    cutefish::ui::View* zoomInButton() const;
+    properdesktop::ui::View* sidebarButton() const;
+    properdesktop::ui::View* zoomInButton() const;
     // The header's previous arrow and place label, in the window.
     bool showsArrows() const;
-    cutefish::ui::RectF previousArrowGeometry() const;
-    cutefish::ui::RectF positionGeometry() const;
+    properdesktop::ui::RectF previousArrowGeometry() const;
+    properdesktop::ui::RectF positionGeometry() const;
     // The file name, and a PDF's page text after it, in the window: the
     // name's drawn end, whether it is elided, and the two baselines.
-    cutefish::ui::RectF titleGeometry() const;
-    cutefish::ui::RectF pageTextGeometry() const;
+    properdesktop::ui::RectF titleGeometry() const;
+    properdesktop::ui::RectF pageTextGeometry() const;
     double titleTextEnd() const;
     bool titleElided() const;
     double titleBaseline() const;
@@ -138,8 +138,8 @@ private:
     void updateHeader();
     void updateTitle();
     void updateBackground();
-    void openContextMenu(cutefish::ui::PointF position);
-    void openPdfContextMenu(cutefish::ui::PointF position, const std::string& uri);
+    void openContextMenu(properdesktop::ui::PointF position);
+    void openPdfContextMenu(properdesktop::ui::PointF position, const std::string& uri);
     // The name of what is shown, for the header and the title.
     std::string shownName() const;
     void showAbout();
@@ -149,19 +149,19 @@ private:
     void updateChrome();
     // The sidebar slides to where m_sidebarShown puts it, or is set there.
     void updateSidebarReveal(bool animate);
-    cutefish::ui::SizeF windowSizeFor(const cutefish::ui::ImageInfo& info) const;
-    cutefish::ui::SizeF windowSizeForPage(cutefish::ui::SizeF page) const;
-    cutefish::ui::SizeF viewportFor(const cutefish::ui::ImageInfo& info) const;
+    properdesktop::ui::SizeF windowSizeFor(const properdesktop::ui::ImageInfo& info) const;
+    properdesktop::ui::SizeF windowSizeForPage(properdesktop::ui::SizeF page) const;
+    properdesktop::ui::SizeF viewportFor(const properdesktop::ui::ImageInfo& info) const;
 
     Application& m_application;
     // The window shows it until the window goes, so it outlives the window.
-    std::unique_ptr<cutefish::ui::Menu> m_mainMenu;
-    std::unique_ptr<cutefish::ui::Window> m_window;
+    std::unique_ptr<properdesktop::ui::Menu> m_mainMenu;
+    std::unique_ptr<properdesktop::ui::Window> m_window;
     Root* m_root = nullptr;
     std::unique_ptr<ImageSequence> m_sequence;
     DocumentKind m_kind = DocumentKind::Image;
     std::unique_ptr<PdfRequest> m_jump;
-    std::vector<cutefish::base::Subscription> m_sequenceConnections;
+    std::vector<properdesktop::base::Subscription> m_sequenceConnections;
     // The files opened that the window has not displayed yet, for the
     // recent files.
     std::set<std::string> m_opened;
@@ -169,7 +169,7 @@ private:
     double m_sidebarReveal = 0;
     double m_revealFrom = 0;
     double m_revealTo = 0;
-    std::unique_ptr<cutefish::ui::Animation> m_revealAnimation;
+    std::unique_ptr<properdesktop::ui::Animation> m_revealAnimation;
     // Of every kind, as last dragged in any window.
     double m_sidebarWidth;
     // The window took its size from its file.
@@ -178,18 +178,18 @@ private:
     // Shown once its first file is ready, which sizes it.
     bool m_mapPending = false;
     std::string m_activationToken;
-    cutefish::base::Job m_copy;
-    std::unique_ptr<cutefish::ui::Toast> m_toast;
-    std::unique_ptr<cutefish::ui::Menu> m_contextMenu;
-    std::unique_ptr<cutefish::ui::FileChooser> m_chooser;
-    std::unique_ptr<cutefish::ui::AboutDialog> m_about;
+    properdesktop::base::Job m_copy;
+    std::unique_ptr<properdesktop::ui::Toast> m_toast;
+    std::unique_ptr<properdesktop::ui::Menu> m_contextMenu;
+    std::unique_ptr<properdesktop::ui::FileChooser> m_chooser;
+    std::unique_ptr<properdesktop::ui::AboutDialog> m_about;
     std::unique_ptr<ShortcutsDialog> m_shortcuts;
     bool m_pointerActive = true;
     double m_chromeOpacity = 1;
     double m_chromeFrom = 1;
     double m_chromeTo = 1;
-    std::unique_ptr<cutefish::ui::Animation> m_chrome;
-    cutefish::base::Timer m_idle;
-    std::vector<cutefish::base::Subscription> m_subscriptions;
+    std::unique_ptr<properdesktop::ui::Animation> m_chrome;
+    properdesktop::base::Timer m_idle;
+    std::vector<properdesktop::base::Subscription> m_subscriptions;
     std::shared_ptr<bool> m_alive = std::make_shared<bool>(true);
 };

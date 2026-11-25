@@ -10,14 +10,14 @@
 #include <optional>
 #include <string>
 
-namespace cutefish::ui {
+namespace properdesktop::ui {
 class Icon;
 class Label;
 }
 
 // A round plate inset a tenth of its size, tinted with the text colour when
 // hovered or pressed, around a glyph: the Text Editor's card buttons.
-class RoundButton : public cutefish::ui::View
+class RoundButton : public properdesktop::ui::View
 {
 public:
     explicit RoundButton(double size = 28);
@@ -30,46 +30,46 @@ public:
 
 protected:
     void layout() override;
-    void paint(cutefish::ui::Painter& painter) override;
+    void paint(properdesktop::ui::Painter& painter) override;
     void enabledChanged() override;
     void pointerEnter() override;
     void pointerLeave() override;
-    void pointerPress(const cutefish::ui::PointerEvent& event) override;
-    void pointerRelease(const cutefish::ui::PointerEvent& event) override;
+    void pointerPress(const properdesktop::ui::PointerEvent& event) override;
+    void pointerRelease(const properdesktop::ui::PointerEvent& event) override;
 
 private:
     double m_size;
     double m_iconSize = 16;
-    cutefish::ui::Icon* m_icon = nullptr;
+    properdesktop::ui::Icon* m_icon = nullptr;
     bool m_hovered = false;
     bool m_pressed = false;
 };
 
 // A text field that hands Return, Shift+Return and Escape to its owner.
-class CardField : public cutefish::ui::TextField
+class CardField : public properdesktop::ui::TextField
 {
 public:
     std::function<void(bool shift)> onReturn;
     std::function<void()> onEscape;
 
 protected:
-    bool keyPress(const cutefish::ui::KeyEvent& event) override;
+    bool keyPress(const properdesktop::ui::KeyEvent& event) override;
 };
 
 // The menus' surface colour, rounded, a hairline edge and a soft shadow, as
 // the Text Editor's floating cards; its content inset by `padding`.
-class FloatingCard : public cutefish::ui::View
+class FloatingCard : public properdesktop::ui::View
 {
 public:
     static constexpr double padding = 6;
 
     FloatingCard();
 
-    cutefish::ui::RectF visualRect() const override;
+    properdesktop::ui::RectF visualRect() const override;
     bool acceptsPointer() const override { return true; }
 
 protected:
-    void paint(cutefish::ui::Painter& painter) override;
+    void paint(properdesktop::ui::Painter& painter) override;
 };
 
 // The Text Editor's find card without its options: the field with the
@@ -98,7 +98,7 @@ protected:
 
 private:
     CardField* m_field;
-    cutefish::ui::Label* m_count;
+    properdesktop::ui::Label* m_count;
     RoundButton* m_previous;
     RoundButton* m_next;
     RoundButton* m_close;

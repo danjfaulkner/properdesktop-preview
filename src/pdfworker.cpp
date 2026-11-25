@@ -3,9 +3,9 @@
 
 #include "pdfworker.h"
 
-#include "cutefish/pdf/document.h"
+#include "properdesktop/pdf/document.h"
 
-using namespace cutefish;
+using namespace properdesktop;
 
 PdfWorker::PdfWorker()
     : m_thread([this] { threadMain(); })

@@ -18,7 +18,7 @@
 #include <unordered_map>
 #include <vector>
 
-namespace cutefish::ui {
+namespace properdesktop::ui {
 class Animation;
 }
 
@@ -32,7 +32,7 @@ class Animation;
 // moves, the tiles there are scaled. At most 128 MiB of tiles stay, the
 // least recently wanted going first. A drag selects text, a double click a
 // word and a triple click a line; a click on a link follows it.
-class PdfView : public cutefish::ui::ScrollView
+class PdfView : public properdesktop::ui::ScrollView
 {
 public:
     // Room for each page's shadow too.
@@ -51,12 +51,12 @@ public:
     double zoom() const { return m_zoom; }
     double fitZoom() const;
     bool isFitted() const { return m_fitted; }
-    void zoomBy(double factor, cutefish::ui::PointF at, bool animate);
-    void zoomTo(double target, cutefish::ui::PointF at, bool animate);
+    void zoomBy(double factor, properdesktop::ui::PointF at, bool animate);
+    void zoomTo(double target, properdesktop::ui::PointF at, bool animate);
     void zoomToFit() { zoomTo(fitZoom(), center(), true); }
     void zoomToActualSize() { zoomTo(1, center(), true); }
     // The middle of the area below the top inset.
-    cutefish::ui::PointF center() const
+    properdesktop::ui::PointF center() const
     {
         return {geometry().width / 2, m_topInset + (geometry().height - m_topInset) / 2};
     }
@@ -74,7 +74,7 @@ public:
     // The page's top at the view's top.
     void goToPage(int page);
     // The point of the page as shown near the view's top.
-    void goTo(int page, cutefish::ui::PointF point);
+    void goTo(int page, properdesktop::ui::PointF point);
     // A screenful down, or up.
     void scrollScreen(int direction);
 
@@ -93,8 +93,8 @@ public:
     int matchIndex() const { return m_matchIndex; }
 
     // In the view's coordinates.
-    cutefish::ui::RectF pageRect(int page) const;
-    cutefish::ui::PointF viewPoint(int page, cutefish::ui::PointF point) const;
+    properdesktop::ui::RectF pageRect(int page) const;
+    properdesktop::ui::PointF viewPoint(int page, properdesktop::ui::PointF point) const;
     // How many tiles are kept, and of those at the current render scale.
     size_t tileCount() const { return m_tiles.size(); }
     size_t sharpTileCount() const;
@@ -105,15 +105,15 @@ public:
     std::function<void()> onCurrentPageChanged;
     std::function<void()> onSelectionChanged;
     // A right press: the link under it, if any.
-    std::function<void(cutefish::ui::PointF windowPosition, const std::string& uri)> onContextMenuRequested;
+    std::function<void(properdesktop::ui::PointF windowPosition, const std::string& uri)> onContextMenuRequested;
     // An http, https or mailto link clicked.
     std::function<void(const std::string& uri)> onOpenUri;
 
 protected:
     void layout() override;
-    bool scroll(const cutefish::ui::ScrollEvent& event) override;
-    bool gesture(const cutefish::ui::GestureEvent& event) override;
-    void hoverMove(const cutefish::ui::PointerEvent& event) override;
+    bool scroll(const properdesktop::ui::ScrollEvent& event) override;
+    bool gesture(const properdesktop::ui::GestureEvent& event) override;
+    void hoverMove(const properdesktop::ui::PointerEvent& event) override;
     void positionChanged() override;
 
 private:
@@ -137,7 +137,7 @@ private:
     {
         TileKey key;
         double scale;
-        cutefish::ui::RasterImage image;
+        properdesktop::ui::RasterImage image;
     };
     struct PendingTile
     {
@@ -153,13 +153,13 @@ private:
     // The page at a height of the content, the nearest one in a gap.
     int pageAt(double y) const;
     // A point of the content as a page and a point on it.
-    int pagePoint(cutefish::ui::PointF content, cutefish::ui::PointF* point) const;
+    int pagePoint(properdesktop::ui::PointF content, properdesktop::ui::PointF* point) const;
     double ratio() const;
     double snap(double value) const;
     double minimumZoom() const;
     double maximumZoom() const { return std::max(fitZoom(), 8.0); }
     void setZoom(double zoom);
-    void setPosition(cutefish::ui::PointF position);
+    void setPosition(properdesktop::ui::PointF position);
     void updateCurrentPage();
     void rest();
     // Asks for the tiles, text and links of what is in sight and near it.
@@ -167,12 +167,12 @@ private:
     void tileArrived(Tile tile);
     // Once every tile in sight is sharp, the others are of no more use.
     void dropOtherScales();
-    void followLink(const cutefish::pdf::Link& link);
-    const cutefish::pdf::Link* linkAt(cutefish::ui::PointF content);
+    void followLink(const properdesktop::pdf::Link& link);
+    const properdesktop::pdf::Link* linkAt(properdesktop::ui::PointF content);
     void scrollToMatch();
 
     PdfDocument* m_document = nullptr;
-    std::vector<cutefish::base::Subscription> m_subscriptions;
+    std::vector<properdesktop::base::Subscription> m_subscriptions;
     Canvas* m_canvas;
     // The sum of the heights before each page, in points.
     std::vector<double> m_heightsBefore;
@@ -181,7 +181,7 @@ private:
     double m_topInset = 0;
     bool m_pageShadows = true;
     bool m_fitted = true;
-    cutefish::ui::SizeF m_lastSize;
+    properdesktop::ui::SizeF m_lastSize;
     double m_renderScale = 0;
     int m_currentPage = 0;
     // goToPage() says which page is current, whatever shows most.
@@ -193,16 +193,16 @@ private:
     size_t m_tileBytes = 0;
     std::unordered_map<TileKey, PendingTile, TileHash> m_pendingTiles;
     std::unordered_map<int64_t, size_t> m_tilesAsked;
-    cutefish::base::Timer m_restTimer;
+    properdesktop::base::Timer m_restTimer;
 
     bool m_anchored = false;
-    cutefish::ui::PointF m_anchorView;
+    properdesktop::ui::PointF m_anchorView;
     int m_anchorPage = 0;
-    cutefish::ui::PointF m_anchorPoint;
-    cutefish::ui::PointF m_pointer;
+    properdesktop::ui::PointF m_anchorPoint;
+    properdesktop::ui::PointF m_pointer;
     double m_animationFrom = 1;
     double m_animationTo = 1;
-    std::unique_ptr<cutefish::ui::Animation> m_animation;
+    std::unique_ptr<properdesktop::ui::Animation> m_animation;
     double m_pinchScale = 1;
 
     TextPosition m_anchor;

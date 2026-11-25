@@ -23,7 +23,7 @@
 #include <sys/signalfd.h>
 #include <unistd.h>
 
-using namespace cutefish;
+using namespace properdesktop;
 using namespace std::chrono_literals;
 
 // The files to open as absolute paths; false when the program is done.
@@ -33,7 +33,7 @@ static bool parseArguments(int argc, char** argv, std::vector<std::string>* path
     for (int i = 1; i < argc; ++i) {
         const std::string argument = argv[i];
         if (argument == "-h" || argument == "--help" || argument == "-?") {
-            std::printf("Usage: %s [options] [files...]\nCutefish Preview\n\nOptions:\n"
+            std::printf("Usage: %s [options] [files...]\nProperDesktop Preview\n\nOptions:\n"
                         "  -h, --help     Displays help on commandline options.\n"
                         "  -v, --version  Displays version information.\n\n"
                         "Arguments:\n"
@@ -42,7 +42,7 @@ static bool parseArguments(int argc, char** argv, std::vector<std::string>* path
             return false;
         }
         if (argument == "-v" || argument == "--version") {
-            std::printf("cutefish-preview %s\n", PREVIEW_VERSION);
+            std::printf("properdesktop-preview %s\n", PREVIEW_VERSION);
             return false;
         }
         if (argument.size() > 1 && argument[0] == '-') {
@@ -74,8 +74,8 @@ int main(int argc, char** argv)
     sigprocmask(SIG_BLOCK, &signals, nullptr);
 
     ui::Application app(argc, argv);
-    app.setApplicationId("cutefish-preview");
-    i18n::setDomain("cutefish-preview");
+    app.setApplicationId("properdesktop-preview");
+    i18n::setDomain("properdesktop-preview");
     for (const auto& [name, svg] : embeddedIcons())
         ui::Icon::registerGlyph(std::string(name), std::string(svg));
 

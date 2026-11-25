@@ -29,7 +29,7 @@
 #include <utility>
 
 
-using namespace cutefish;
+using namespace properdesktop;
 using ui::rounding::centeredStart;
 
 // The header's spacing: the window buttons' inset from the window's edge,

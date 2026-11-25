@@ -18,9 +18,9 @@
 #include <filesystem>
 
 
-using namespace cutefish;
-using cutefish::i18n::tr;
-using cutefish::i18n::trc;
+using namespace properdesktop;
+using properdesktop::i18n::tr;
+using properdesktop::i18n::trc;
 
 void PreviewWindow::buildMainMenu()
 {

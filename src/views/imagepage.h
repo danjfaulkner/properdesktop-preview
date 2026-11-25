@@ -14,7 +14,7 @@
 #include <string>
 #include <vector>
 
-namespace cutefish::ui {
+namespace properdesktop::ui {
 class BusyIndicator;
 class ImageView;
 class Label;
@@ -27,19 +27,19 @@ struct ShownFile
     std::string name;
     std::string mimeType;
     std::string size;
-    cutefish::ui::ImageInfo info;
+    properdesktop::ui::ImageInfo info;
 };
 
 // The zoomable image, and on a fitted one a horizontal two-finger swipe
 // that steps once per gesture.
-class ImageViewer : public cutefish::ui::ZoomableImageView
+class ImageViewer : public properdesktop::ui::ZoomableImageView
 {
 public:
     // -1 for the previous image, 1 for the next.
     std::function<void(int step)> onSwipe;
 
 protected:
-    bool scroll(const cutefish::ui::ScrollEvent& event) override;
+    bool scroll(const properdesktop::ui::ScrollEvent& event) override;
 
 private:
     double m_swipe = 0;
@@ -50,7 +50,7 @@ private:
 // it is decoded at the size it is shown at, so the step that brings it
 // changes everything in one frame; its neighbours are decoded ahead. A file
 // that is not an image gets a card with its icon, name and size.
-class ImagePage : public cutefish::ui::View
+class ImagePage : public properdesktop::ui::View
 {
 public:
     ImagePage();
@@ -71,7 +71,7 @@ public:
     // rest centres, below it.
     void setTopInset(double inset);
     // The page's size below the inset.
-    cutefish::ui::SizeF viewport() const;
+    properdesktop::ui::SizeF viewport() const;
 
     // What is on screen; it trails load() while the next image decodes.
     const ShownFile& shown() const { return m_shown; }
@@ -80,7 +80,7 @@ public:
 
     // The page's size when it shows the image, for the first image, which
     // sizes the window.
-    std::function<cutefish::ui::SizeF(const cutefish::ui::ImageInfo& info)> viewportFor;
+    std::function<properdesktop::ui::SizeF(const properdesktop::ui::ImageInfo& info)> viewportFor;
     // What is shown changed, before the frame that shows it.
     std::function<void()> onShown;
 
@@ -95,24 +95,24 @@ private:
     void updateStatus();
     double ratio() const;
     // The image's decode in device pixels when it fits the viewport.
-    cutefish::ui::SizeF fittedPixels(const cutefish::ui::ImageInfo& info, cutefish::ui::SizeF viewport) const;
-    static bool decodesAhead(const cutefish::ui::ImageInfo& info);
+    properdesktop::ui::SizeF fittedPixels(const properdesktop::ui::ImageInfo& info, properdesktop::ui::SizeF viewport) const;
+    static bool decodesAhead(const properdesktop::ui::ImageInfo& info);
 
     ImageViewer* m_viewer;
-    cutefish::ui::BusyIndicator* m_busy;
-    cutefish::ui::Label* m_failed;
+    properdesktop::ui::BusyIndicator* m_busy;
+    properdesktop::ui::Label* m_failed;
     FileCard* m_card;
     // Decode into the image cache: the image staged, and the neighbours.
-    cutefish::ui::ImageView* m_preloader;
-    std::vector<cutefish::ui::ImageView*> m_ahead;
+    properdesktop::ui::ImageView* m_preloader;
+    std::vector<properdesktop::ui::ImageView*> m_ahead;
     ShownFile m_shown;
     // The device pixel ratio the shown image was laid out for.
     double m_shownRatio = 1;
     std::optional<ShownFile> m_pending;
-    cutefish::base::Job m_describe;
-    std::vector<cutefish::base::Job> m_aheadJobs;
-    cutefish::base::Timer m_stall;
-    cutefish::base::Timer m_busyDelay;
+    properdesktop::base::Job m_describe;
+    std::vector<properdesktop::base::Job> m_aheadJobs;
+    properdesktop::base::Timer m_stall;
+    properdesktop::base::Timer m_busyDelay;
     bool m_keepsView = false;
     bool m_busyElapsed = false;
     bool m_wasLoading = false;

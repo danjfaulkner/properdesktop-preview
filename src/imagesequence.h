@@ -43,9 +43,9 @@ public:
 
     // The files or the current one changed. Changes on disk arrive together,
     // once a burst of them has been quiet for 100 ms.
-    cutefish::base::Signal<> changed;
+    properdesktop::base::Signal<> changed;
     // The current file was written over, once per burst.
-    cutefish::base::Signal<> currentWritten;
+    properdesktop::base::Signal<> currentWritten;
 
 private:
     ImageSequence(std::vector<std::string> paths, int index, bool followsFolder);
@@ -61,8 +61,8 @@ private:
     std::vector<std::string> m_paths;
     int m_index = 0;
     bool m_followsFolder = false;
-    std::vector<cutefish::base::FileWatch> m_watches;
-    cutefish::base::Timer m_settle;
-    cutefish::base::Job m_listing;
+    std::vector<properdesktop::base::FileWatch> m_watches;
+    properdesktop::base::Timer m_settle;
+    properdesktop::base::Job m_listing;
     bool m_currentTouched = false;
 };

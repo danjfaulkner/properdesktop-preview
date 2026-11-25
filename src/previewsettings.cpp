@@ -9,7 +9,7 @@
 #include <algorithm>
 #include <filesystem>
 
-using namespace cutefish;
+using namespace properdesktop;
 
 static constexpr const char* kRecentKey = "Recent/Files";
 static constexpr const char* kSidebarWidthKey = "Sidebar/Width";
@@ -36,7 +36,7 @@ PreviewSettings::PreviewSettings(std::string file)
 
 std::string PreviewSettings::defaultPath()
 {
-    return base::paths::cutefishConfig("preview");
+    return base::paths::properdesktopConfig("preview");
 }
 
 bool PreviewSettings::sidebarShown(DocumentKind kind, bool unset) const

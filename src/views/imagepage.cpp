@@ -3,7 +3,7 @@
 
 #include "imagepage.h"
 
-#include "cutefish/files/file_item.h"
+#include "properdesktop/files/file_item.h"
 
 #include "base/i18n.h"
 #include "base/mime_database.h"
@@ -19,8 +19,8 @@
 #include <cmath>
 #include <filesystem>
 
-using namespace cutefish;
-using cutefish::i18n::tr;
+using namespace properdesktop;
+using properdesktop::i18n::tr;
 using ui::rounding::centeredStart;
 
 static constexpr double kSwipeDistance = 60;

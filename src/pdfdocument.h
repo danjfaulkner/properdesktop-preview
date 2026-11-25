@@ -5,7 +5,7 @@
 
 #include "pdfworker.h"
 
-#include "cutefish/pdf/document.h"
+#include "properdesktop/pdf/document.h"
 
 #include "base/geometry.h"
 #include "base/lru_cache.h"
@@ -60,26 +60,26 @@ public:
 
     int pageCount() const { return int(m_sizes.size()); }
     // In points, as shown.
-    const std::vector<cutefish::ui::SizeF>& pageSizes() const { return m_sizes; }
+    const std::vector<properdesktop::ui::SizeF>& pageSizes() const { return m_sizes; }
     // Empty until read, after the first pages are drawn.
-    const std::vector<cutefish::pdf::OutlineItem>& outline() const { return m_outline; }
+    const std::vector<properdesktop::pdf::OutlineItem>& outline() const { return m_outline; }
     bool outlineRead() const { return m_outlineRead; }
 
     // Null until it arrives.
-    const cutefish::pdf::PageText* text(int page, PdfWorker::Urgency urgency = PdfWorker::Urgency::Near);
-    const std::vector<cutefish::pdf::Link>* links(int page, PdfWorker::Urgency urgency = PdfWorker::Urgency::Near);
+    const properdesktop::pdf::PageText* text(int page, PdfWorker::Urgency urgency = PdfWorker::Urgency::Near);
+    const std::vector<properdesktop::pdf::Link>* links(int page, PdfWorker::Urgency urgency = PdfWorker::Urgency::Near);
     // Text and links asked for pages outside these are not read after all.
     void keepPageRequests(int first, int last);
     // The page fitted into `box` device pixels; another box asks again.
-    const cutefish::ui::RasterImage* thumbnail(int page, cutefish::base::Size box);
+    const properdesktop::ui::RasterImage* thumbnail(int page, properdesktop::base::Size box);
     // The page's thumbnail in whatever box it came, as a stand-in.
-    const cutefish::ui::RasterImage* anyThumbnail(int page);
+    const properdesktop::ui::RasterImage* anyThumbnail(int page);
     // Thumbnails asked for pages outside these are not drawn after all.
     void keepThumbnailRequests(int first, int last);
 
     // The point of the page as shown it goes to. The caller keeps the request.
-    [[nodiscard]] PdfRequest resolve(const cutefish::pdf::Destination& destination,
-                 std::function<void(int page, cutefish::ui::PointF point)> done);
+    [[nodiscard]] PdfRequest resolve(const properdesktop::pdf::Destination& destination,
+                 std::function<void(int page, properdesktop::ui::PointF point)> done);
     // UTF-8 from `from` up to `to`, lines of separate pages apart, read a
     // page at a time so what is in sight is drawn in between. A newer read,
     // or the document going, drops it.
@@ -89,34 +89,34 @@ public:
     void setSearch(const std::string& query, int firstPage);
     const std::string& searchText() const { return m_query; }
     // Matches of the pages searched so far.
-    const std::vector<cutefish::pdf::Match>* matches(int page) const;
+    const std::vector<properdesktop::pdf::Match>* matches(int page) const;
     int matchCount() const { return m_matchCount; }
     bool searchFinished() const { return m_searched >= pageCount(); }
 
     PdfWorker& worker() { return *m_worker; }
 
-    cutefish::base::Signal<> stateChanged;
-    cutefish::base::Signal<> outlineChanged;
+    properdesktop::base::Signal<> stateChanged;
+    properdesktop::base::Signal<> outlineChanged;
     // Its text or links arrived.
-    cutefish::base::Signal<int> pageDataChanged;
-    cutefish::base::Signal<int> thumbnailChanged;
+    properdesktop::base::Signal<int> pageDataChanged;
+    properdesktop::base::Signal<int> thumbnailChanged;
     // More pages were searched.
-    cutefish::base::Signal<> searchChanged;
+    properdesktop::base::Signal<> searchChanged;
 
 private:
     struct PageData
     {
-        std::optional<cutefish::pdf::PageText> text;
-        std::optional<std::vector<cutefish::pdf::Link>> links;
+        std::optional<properdesktop::pdf::PageText> text;
+        std::optional<std::vector<properdesktop::pdf::Link>> links;
     };
     struct Thumbnail
     {
-        cutefish::base::Size box;
-        cutefish::ui::RasterImage image;
+        properdesktop::base::Size box;
+        properdesktop::ui::RasterImage image;
     };
     struct PendingThumbnail
     {
-        cutefish::base::Size box;
+        properdesktop::base::Size box;
         PdfRequest request;
     };
 
@@ -137,24 +137,24 @@ private:
     std::string m_path;
     std::unique_ptr<PdfWorker> m_worker;
     State m_state = State::Opening;
-    std::vector<cutefish::ui::SizeF> m_sizes;
-    std::vector<cutefish::pdf::OutlineItem> m_outline;
+    std::vector<properdesktop::ui::SizeF> m_sizes;
+    std::vector<properdesktop::pdf::OutlineItem> m_outline;
     bool m_outlineRead = false;
     PdfRequest m_opening;
     PdfRequest m_info;
     PdfRequest m_outlineRequest;
     PdfRequest m_textRead;
     // The pages near what was asked for last; far ones are read again.
-    cutefish::base::LruCache<int, PageData> m_pages;
+    properdesktop::base::LruCache<int, PageData> m_pages;
     std::unordered_map<int, PdfRequest> m_textRequests;
     std::unordered_map<int, PdfRequest> m_linkRequests;
-    cutefish::base::LruCache<int, Thumbnail> m_thumbnails;
+    properdesktop::base::LruCache<int, Thumbnail> m_thumbnails;
     std::unordered_map<int, PendingThumbnail> m_thumbnailRequests;
 
     std::string m_query;
     int m_searchStart = 0;
     int m_searched = 0;
     int m_matchCount = 0;
-    std::unordered_map<int, std::vector<cutefish::pdf::Match>> m_matches;
+    std::unordered_map<int, std::vector<properdesktop::pdf::Match>> m_matches;
     PdfRequest m_search;
 };

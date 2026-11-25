@@ -2,8 +2,8 @@
 Version=1.0
 Name=Preview
 Comment=View images and PDF documents
-Exec=cutefish-preview %F
-Icon=cutefish-preview
+Exec=properdesktop-preview %F
+Icon=properdesktop-preview
 Terminal=false
 Type=Application
 Categories=Graphics;Viewer;Office;

@@ -8,11 +8,11 @@
 #include <string>
 #include <vector>
 
-namespace cutefish::ui {
+namespace properdesktop::ui {
 class Window;
 }
 
-namespace cutefish::base::dbus {
+namespace properdesktop::base::dbus {
 class Connection;
 class Object;
 }
@@ -26,7 +26,7 @@ class TurnSaver;
 class Application
 {
 public:
-    static constexpr const char* kService = "org.cutefish.Preview";
+    static constexpr const char* kService = "org.properdesktop.Preview";
     static constexpr const char* kPath = "/Preview";
 
     explicit Application(PreviewSettings& settings);
@@ -54,12 +54,12 @@ public:
     void showInFiles(const std::string& path) const;
     // With uriOpener when set, else as the desktop starts the application it
     // has for the scheme, given the focus from `window`, which the user is in.
-    void openUri(const std::string& uri, cutefish::ui::Window* window) const;
+    void openUri(const std::string& uri, properdesktop::ui::Window* window) const;
     std::function<void(const std::string& uri)> uriOpener;
 
-    // Publishes org.cutefish.Preview at /Preview; false when another process
+    // Publishes org.properdesktop.Preview at /Preview; false when another process
     // has the name.
-    bool registerService(cutefish::base::dbus::Connection* bus);
+    bool registerService(properdesktop::base::dbus::Connection* bus);
 
 private:
     PreviewWindow* windowShowing(const std::string& path) const;
@@ -70,5 +70,5 @@ private:
     // Before the windows, which hold on to it, and outliving them.
     std::unique_ptr<TurnSaver> m_turnSaver;
     std::vector<std::unique_ptr<PreviewWindow>> m_windows;
-    std::unique_ptr<cutefish::base::dbus::Object> m_service;
+    std::unique_ptr<properdesktop::base::dbus::Object> m_service;
 };

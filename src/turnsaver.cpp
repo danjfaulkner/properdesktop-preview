@@ -8,7 +8,7 @@
 
 #include <sys/stat.h>
 
-using namespace cutefish;
+using namespace properdesktop;
 
 TurnSaver::TurnSaver()
     : m_loop(base::EventLoop::current()->handle())

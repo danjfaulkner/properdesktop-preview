@@ -11,8 +11,8 @@
 int main(int argc, char** argv)
 {
     testing::InitGoogleTest(&argc, argv);
-    cutefish::ui::Application application(argc, argv, cutefish::ui::Application::Platform::Headless);
+    properdesktop::ui::Application application(argc, argv, properdesktop::ui::Application::Platform::Headless);
     for (const auto& [name, svg] : embeddedIcons())
-        cutefish::ui::Icon::registerGlyph(std::string(name), std::string(svg));
+        properdesktop::ui::Icon::registerGlyph(std::string(name), std::string(svg));
     return RUN_ALL_TESTS();
 }

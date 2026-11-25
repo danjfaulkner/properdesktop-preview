@@ -19,7 +19,7 @@
 #include <limits>
 #include <tuple>
 
-using namespace cutefish;
+using namespace properdesktop;
 using namespace std::chrono_literals;
 
 static constexpr int64_t kScaleSteps = 4096;

@@ -23,7 +23,7 @@ public:
 
     explicit PreviewSettings(std::string file);
 
-    // ~/.config/cutefish/preview.conf.
+    // ~/.config/properdesktop/preview.conf.
     static std::string defaultPath();
 
     // `unset` until the sidebar is toggled for the kind.
@@ -38,7 +38,7 @@ public:
     void addRecentFile(const std::string& path);
     void clearRecentFiles();
 
-    cutefish::base::Signal<> recentFilesChanged;
+    properdesktop::base::Signal<> recentFilesChanged;
 
 private:
     void writeRecentFiles();

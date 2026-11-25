@@ -26,13 +26,13 @@
 
 #include <cmath>
 
-using namespace cutefish::ui;
+using namespace properdesktop::ui;
 using namespace std::chrono_literals;
 
 namespace {
 
 // Three pages of 300 x 200. The first: a red square at its top left, "Hello
-// Cutefish", a link to page 3 at its top right, one to a web address at its
+// Proper Desktop", a link to page 3 at its top right, one to a web address at its
 // bottom right and a script at its bottom left. An outline: Start, End.
 std::string samplePdf()
 {
@@ -43,12 +43,12 @@ std::string samplePdf()
         "<< " + page + " /Contents 6 0 R /Annots [10 0 R 11 0 R 15 0 R] >>",
         "<< " + page + " /Contents 7 0 R >>",
         "<< " + page + " /Contents 8 0 R >>",
-        pdfStream("1 0 0 rg 0 180 20 20 re f BT /F1 12 Tf 30 100 Td (Hello Cutefish) Tj ET"),
-        pdfStream("BT /F1 12 Tf 30 100 Td (Second Cutefish) Tj ET"),
+        pdfStream("1 0 0 rg 0 180 20 20 re f BT /F1 12 Tf 30 100 Td (Hello Proper Desktop) Tj ET"),
+        pdfStream("BT /F1 12 Tf 30 100 Td (Second Proper Desktop) Tj ET"),
         pdfStream("BT /F1 12 Tf 30 100 Td (Third page) Tj ET"),
         "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>",
         "<< /Type /Annot /Subtype /Link /Rect [200 0 300 30] /Border [0 0 0] "
-        "/A << /S /URI /URI (https://cutefish.org) >> >>",
+        "/A << /S /URI /URI (https://properdesktop.org) >> >>",
         "<< /Type /Annot /Subtype /Link /Rect [200 170 300 200] /Border [0 0 0] /Dest [5 0 R /XYZ 0 200 0] >>",
         "<< /Type /Outlines /First 13 0 R /Last 14 0 R /Count 2 >>",
         "<< /Title (Start) /Parent 12 0 R /Next 14 0 R /Dest [3 0 R /Fit] >>",
@@ -94,7 +94,7 @@ protected:
         application.uriOpener = [this](const std::string& uri) { opened.push_back(uri); };
     }
 
-    cutefish::base::EventLoop& loop() { return cutefish::ui::Application::instance()->loop(); }
+    properdesktop::base::EventLoop& loop() { return properdesktop::ui::Application::instance()->loop(); }
 
     PreviewWindow& openPdf(const std::string& path)
     {
@@ -265,7 +265,7 @@ TEST_F(PdfUiTest, FindTintsTheMatchesAndStepsThroughThem)
     PdfView* view = page->view();
     press(window, key::letter('f'), ControlModifier);
     ASSERT_TRUE(page->findCard()->isVisible());
-    TestInput::typeText(window.window(), "cutefish");
+    TestInput::typeText(window.window(), "properdesktop");
     ASSERT_TRUE(waitFor(loop(), [&] { return page->document()->searchFinished(); }));
     EXPECT_EQ(page->document()->matchCount(), 2);
     EXPECT_EQ(view->matchPage(), 0);
@@ -311,10 +311,10 @@ TEST_F(PdfUiTest, ADragSelectsTextAndCopyCopiesIt)
     PdfView* view = window.pdfPage()->view();
     PdfDocument* document = window.pdfPage()->document();
     ASSERT_TRUE(waitFor(loop(), [&] { return document->text(0) != nullptr; }));
-    const cutefish::pdf::PageText& text = *document->text(0);
+    const properdesktop::pdf::PageText& text = *document->text(0);
     ASSERT_GE(text.characters.size(), 14u);
-    const cutefish::base::RectF first = text.characters[0].box;
-    const cutefish::base::RectF fifth = text.characters[4].box;
+    const properdesktop::base::RectF first = text.characters[0].box;
+    const properdesktop::base::RectF fifth = text.characters[4].box;
     const PointF from = windowPoint(window, 0, {first.x() + 0.5, first.y() + first.height() / 2});
     const PointF to = windowPoint(window, 0, {fifth.right() - 0.5, fifth.y() + fifth.height() / 2});
     TestInput::movePointer(window.window(), from);
@@ -326,16 +326,16 @@ TEST_F(PdfUiTest, ADragSelectsTextAndCopyCopiesIt)
     EXPECT_EQ(copied("Hello"), "Hello");
 
     // A double click takes the word.
-    const cutefish::base::RectF word = text.characters[8].box;
+    const properdesktop::base::RectF word = text.characters[8].box;
     const PointF inWord = windowPoint(window, 0, {word.x() + word.width() / 2, word.y() + word.height() / 2});
     TestInput::click(window.window(), inWord);
     TestInput::click(window.window(), inWord);
     press(window, key::letter('c'), ControlModifier);
-    EXPECT_EQ(copied("Cutefish"), "Cutefish");
+    EXPECT_EQ(copied("ProperDesktop"), "ProperDesktop");
 
     press(window, key::letter('a'), ControlModifier);
     press(window, key::letter('c'), ControlModifier);
-    EXPECT_EQ(copied("Hello Cutefish\nSecond Cutefish\nThird page"), "Hello Cutefish\nSecond Cutefish\nThird page");
+    EXPECT_EQ(copied("Hello Proper Desktop\nSecond Proper Desktop\nThird page"), "Hello Proper Desktop\nSecond Proper Desktop\nThird page");
 }
 
 TEST_F(PdfUiTest, AWrongPasswordIsAskedForAgainInPlace)
@@ -366,7 +366,7 @@ TEST_F(PdfUiTest, LinksGoToTheirPageOrOpenOnlyWebAndMail)
 
     press(window, key::Home);
     TestInput::click(window.window(), windowPoint(window, 0, {250, 185}));
-    EXPECT_EQ(opened, (std::vector<std::string> {"https://cutefish.org"}));
+    EXPECT_EQ(opened, (std::vector<std::string> {"https://properdesktop.org"}));
     TestInput::click(window.window(), windowPoint(window, 0, {50, 185}));
     EXPECT_EQ(opened.size(), 1u);
 }
@@ -388,7 +388,7 @@ TEST_F(PdfUiTest, TheContentsGoWhereTheyPoint)
 TEST_F(PdfUiTest, ALargeDocumentShowsItsFirstPageAtOnce)
 {
     const std::string path = writeFile(directory.filePath("book.pdf"), bookPdf(2000));
-    cutefish::base::ElapsedTimer timer;
+    properdesktop::base::ElapsedTimer timer;
     timer.start();
     application.open({path});
     PreviewWindow& window = *application.windows().front();
@@ -437,9 +437,9 @@ TEST_F(PdfUiTest, ADoubleClickInChineseTakesAWord)
     PreviewWindow& window = openPdf(writeFile(directory.filePath("chinese.pdf"), chinese));
     PdfDocument* document = window.pdfPage()->document();
     ASSERT_TRUE(waitFor(loop(), [&] { return document->text(0) != nullptr; }));
-    const cutefish::pdf::PageText& text = *document->text(0);
+    const properdesktop::pdf::PageText& text = *document->text(0);
     ASSERT_EQ(text.text(0, text.characters.size()), "我喜欢中文。");
-    const cutefish::base::RectF box = text.characters[1].box;
+    const properdesktop::base::RectF box = text.characters[1].box;
     const PointF inWord = windowPoint(window, 0, {box.x() + box.width() / 2, box.y() + box.height() / 2});
     TestInput::click(window.window(), inWord);
     TestInput::click(window.window(), inWord);
@@ -454,7 +454,7 @@ TEST_F(PdfUiTest, ADragPastTheBottomScrollsAndSelectsOn)
     PdfView* view = window.pdfPage()->view();
     PdfDocument* document = window.pdfPage()->document();
     ASSERT_TRUE(waitFor(loop(), [&] { return document->text(0) != nullptr; }));
-    const cutefish::base::RectF first = document->text(0)->characters[0].box;
+    const properdesktop::base::RectF first = document->text(0)->characters[0].box;
     const PointF from = windowPoint(window, 0, {first.x() + 0.5, first.y() + first.height() / 2});
     TestInput::movePointer(window.window(), from);
     TestInput::press(window.window(), from);
@@ -625,7 +625,7 @@ TEST_F(PdfUiTest, PageThumbnailsKeepOneGapToTheirPlate)
         EXPECT_EQ(thumbnail.height * scale, std::round(thumbnail.height * scale));
     }
     EXPECT_TRUE(until(window, [&] { return window.pdfPage()->document()->anyThumbnail(1) != nullptr; }));
-    const cutefish::ui::RasterImage* image = window.pdfPage()->document()->anyThumbnail(1);
+    const properdesktop::ui::RasterImage* image = window.pdfPage()->document()->anyThumbnail(1);
     const RectF thumbnail = sidebar->pageThumbnailGeometry(1, window.window().scale());
     EXPECT_EQ(image->width(), int(std::round(thumbnail.width * window.window().scale())));
     EXPECT_EQ(image->height(), int(std::round(thumbnail.height * window.window().scale())));
@@ -711,7 +711,7 @@ TEST_F(PdfUiTest, PageThumbnailsFollowTheSidebarsWidth)
     const RectF thumbnail = sidebar->pageThumbnailGeometry(1, scale);
     PdfDocument* document = window.pdfPage()->document();
     EXPECT_TRUE(until(window, [&] {
-        const cutefish::ui::RasterImage* image = document->anyThumbnail(1);
+        const properdesktop::ui::RasterImage* image = document->anyThumbnail(1);
         return image && image->width() == int(std::round(thumbnail.width * scale))
                 && image->height() == int(std::round(thumbnail.height * scale));
     }));

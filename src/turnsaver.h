@@ -39,7 +39,7 @@ public:
 
     // A file's turns are all written, or one of the writes failed with
     // this rotation::turn() result.
-    cutefish::base::Signal<const std::string&, int> written;
+    properdesktop::base::Signal<const std::string&, int> written;
 
     // What tells one write of a file from another: inode, size and
     // modification time.
@@ -56,7 +56,7 @@ private:
     void run();
     void done(const Job& job, int error);
 
-    cutefish::base::LoopHandle m_loop;
+    properdesktop::base::LoopHandle m_loop;
     mutable std::mutex m_mutex;
     std::condition_variable m_wake;
     std::deque<Job> m_jobs;

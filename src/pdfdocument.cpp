@@ -9,7 +9,7 @@
 #include <cmath>
 #include <filesystem>
 
-using namespace cutefish;
+using namespace properdesktop;
 using Urgency = PdfWorker::Urgency;
 
 static constexpr size_t kPagesKept = 64;

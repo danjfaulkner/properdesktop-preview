@@ -16,7 +16,7 @@
 
 #include <algorithm>
 
-using namespace cutefish;
+using namespace properdesktop;
 
 Application::Application(PreviewSettings& settings)
     : m_settings(settings)

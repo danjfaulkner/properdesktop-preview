@@ -16,9 +16,9 @@
 #include <algorithm>
 #include <filesystem>
 
-using namespace cutefish;
-using cutefish::i18n::format;
-using cutefish::i18n::tr;
+using namespace properdesktop;
+using properdesktop::i18n::format;
+using properdesktop::i18n::tr;
 using ui::rounding::centeredStart;
 
 static constexpr double kCardInset = 12;

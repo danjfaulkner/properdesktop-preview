@@ -7,7 +7,7 @@
 #include <memory>
 #include <string>
 
-namespace cutefish::ui {
+namespace properdesktop::ui {
 class DialogWindow;
 class Window;
 }
@@ -17,7 +17,7 @@ class Window;
 class PasswordDialog
 {
 public:
-    PasswordDialog(cutefish::ui::Window* parent, std::string name);
+    PasswordDialog(properdesktop::ui::Window* parent, std::string name);
     ~PasswordDialog();
 
     void show();
@@ -26,7 +26,7 @@ public:
     void close();
     bool isOpen() const;
     // Null once closed.
-    cutefish::ui::Window* window() const;
+    properdesktop::ui::Window* window() const;
     // The password typed stays.
     void retranslate();
 
@@ -37,7 +37,7 @@ private:
 
     void build(const std::string& password);
 
-    std::unique_ptr<cutefish::ui::DialogWindow> m_dialog;
+    std::unique_ptr<properdesktop::ui::DialogWindow> m_dialog;
     Content* m_content = nullptr;
     std::string m_name;
     bool m_wrong = false;

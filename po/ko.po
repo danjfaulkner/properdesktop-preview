@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: cutefish-preview\n"
-"Report-Msgid-Bugs-To: https://github.com/cutefishos\n"
+"Project-Id-Version: properdesktop-preview\n"
+"Report-Msgid-Bugs-To: https://github.com/danjfaulkner\n"
 "POT-Creation-Date: 2026-11-13 18:50+0800\n"
 "PO-Revision-Date: 2026-11-13 17:03+0800\n"
 "Last-Translator: \n"
@@ -75,7 +75,7 @@ msgstr "일치 항목 없음"
 msgid "{index} of {count}"
 msgstr "{index}/{count}"
 
-#: src/views/previewwindow.cpp cutefish-preview.desktop
+#: src/views/previewwindow.cpp properdesktop-preview.desktop
 msgid "Preview"
 msgstr "미리보기"
 
@@ -128,7 +128,7 @@ msgstr "링크 복사"
 msgid "Select All"
 msgstr "모두 선택"
 
-#: src/views/previewwindow.cpp cutefish-preview.desktop
+#: src/views/previewwindow.cpp properdesktop-preview.desktop
 msgid "View images and PDF documents"
 msgstr "이미지와 PDF 문서를 봅니다"
 
@@ -373,6 +373,6 @@ msgstr "최근 항목"
 msgid "Clear"
 msgstr "지우기"
 
-#: cutefish-preview.desktop
+#: properdesktop-preview.desktop
 msgid "Image;Picture;Photo;Viewer;PDF;Document;"
 msgstr "이미지;사진;그림;뷰어;미리보기;PDF;문서;Image;Picture;Photo;Viewer;Document;"

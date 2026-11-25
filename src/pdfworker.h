@@ -13,7 +13,7 @@
 #include <mutex>
 #include <thread>
 
-namespace cutefish::pdf {
+namespace properdesktop::pdf {
 class Document;
 }
 
@@ -89,10 +89,10 @@ private:
     struct Task
     {
         std::shared_ptr<std::atomic<bool>> cancelled;
-        std::function<void(std::unique_ptr<cutefish::pdf::Document>& document)> run;
+        std::function<void(std::unique_ptr<properdesktop::pdf::Document>& document)> run;
     };
 
-    PdfRequest enqueue(Urgency urgency, std::function<void(std::unique_ptr<cutefish::pdf::Document>&,
+    PdfRequest enqueue(Urgency urgency, std::function<void(std::unique_ptr<properdesktop::pdf::Document>&,
                                                            const std::shared_ptr<std::atomic<bool>>&)> run);
     void threadMain();
 
@@ -108,10 +108,10 @@ PdfRequest PdfWorker::run(Urgency urgency, Work work, Done done)
 {
     // std::function copies; the callables and the result may only move.
     auto shared = std::make_shared<std::pair<Work, Done>>(std::move(work), std::move(done));
-    cutefish::base::LoopHandle loop = cutefish::base::EventLoop::current()->handle();
-    return enqueue(urgency, [shared, loop](std::unique_ptr<cutefish::pdf::Document>& document,
+    properdesktop::base::LoopHandle loop = properdesktop::base::EventLoop::current()->handle();
+    return enqueue(urgency, [shared, loop](std::unique_ptr<properdesktop::pdf::Document>& document,
                                            const std::shared_ptr<std::atomic<bool>>& cancelled) {
-        using Result = std::invoke_result_t<Work&, const cutefish::pdf::Document*, const std::atomic<bool>*>;
+        using Result = std::invoke_result_t<Work&, const properdesktop::pdf::Document*, const std::atomic<bool>*>;
         auto result = std::make_shared<Result>(shared->first(document.get(), cancelled.get()));
         if (cancelled->load())
             return;

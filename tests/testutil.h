@@ -47,10 +47,10 @@ inline std::string writeFile(const std::string& path, const std::string& content
 // Red on the left half, blue on the right.
 inline std::string writeHalvesPng(const std::string& path, int width, int height)
 {
-    cutefish::ui::Image image(width, height);
+    properdesktop::ui::Image image(width, height);
     for (int y = 0; y < height; ++y)
         for (int x = 0; x < width; ++x)
-            image.setPixel(x, y, cutefish::ui::Color::rgb(x < width / 2 ? 0xFF0000 : 0x0000FF));
+            image.setPixel(x, y, properdesktop::ui::Color::rgb(x < width / 2 ? 0xFF0000 : 0x0000FF));
     image.savePng(path);
     return path;
 }
@@ -58,10 +58,10 @@ inline std::string writeHalvesPng(const std::string& path, int width, int height
 // A grey PNG of this many pixels.
 inline std::string writePng(const std::string& path, int width, int height)
 {
-    cutefish::ui::Image image(width, height);
+    properdesktop::ui::Image image(width, height);
     for (int y = 0; y < height; ++y)
         for (int x = 0; x < width; ++x)
-            image.setPixel(x, y, cutefish::ui::Color::rgb(0x808080));
+            image.setPixel(x, y, properdesktop::ui::Color::rgb(0x808080));
     image.savePng(path);
     return path;
 }

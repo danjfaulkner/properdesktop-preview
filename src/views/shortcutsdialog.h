@@ -5,7 +5,7 @@
 
 #include <memory>
 
-namespace cutefish::ui {
+namespace properdesktop::ui {
 class DialogWindow;
 class Window;
 }
@@ -15,7 +15,7 @@ class Window;
 class ShortcutsDialog
 {
 public:
-    explicit ShortcutsDialog(cutefish::ui::Window* parent);
+    explicit ShortcutsDialog(properdesktop::ui::Window* parent);
     ~ShortcutsDialog();
 
     void show();
@@ -26,6 +26,6 @@ private:
     class Row;
     class Scroller;
 
-    cutefish::ui::Window* m_parent;
-    std::unique_ptr<cutefish::ui::DialogWindow> m_dialog;
+    properdesktop::ui::Window* m_parent;
+    std::unique_ptr<properdesktop::ui::DialogWindow> m_dialog;
 };

@@ -15,8 +15,8 @@
 #include "sidebar.h"
 #include "welcomepage.h"
 
-#include "cutefish/files/task.h"
-#include "cutefish/files/url.h"
+#include "properdesktop/files/task.h"
+#include "properdesktop/files/url.h"
 
 #include "base/event_loop.h"
 #include "base/file.h"
@@ -44,10 +44,10 @@
 #include <utility>
 
 
-using namespace cutefish;
+using namespace properdesktop;
 using namespace std::chrono_literals;
-using cutefish::i18n::format;
-using cutefish::i18n::tr;
+using properdesktop::i18n::format;
+using properdesktop::i18n::tr;
 
 // The terminal's default window shape, at nine tenths of its size.
 static constexpr ui::SizeF kWelcomeSize {684, 405};
@@ -810,7 +810,7 @@ void PreviewWindow::showAbout()
         m_about = std::make_unique<ui::AboutDialog>(m_window.get());
         m_about->setName(tr("Preview"));
         m_about->setDescription(tr("View images and PDF documents"));
-        m_about->setIconSource("cutefish-preview");
+        m_about->setIconSource("properdesktop-preview");
         m_about->onLinkActivated = [this](const std::string& link) {
             m_application.openUri(link, m_about->window() ? m_about->window() : m_window.get());
         };

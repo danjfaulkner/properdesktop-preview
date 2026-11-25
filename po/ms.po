@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: cutefish-preview\n"
-"Report-Msgid-Bugs-To: https://github.com/cutefishos\n"
+"Project-Id-Version: properdesktop-preview\n"
+"Report-Msgid-Bugs-To: https://github.com/danjfaulkner\n"
 "POT-Creation-Date: 2026-11-13 18:50+0800\n"
 "PO-Revision-Date: 2026-11-13 18:50+0800\n"
 "Last-Translator: \n"
@@ -75,7 +75,7 @@ msgstr "Tiada padanan"
 msgid "{index} of {count}"
 msgstr "{index} daripada {count}"
 
-#: src/views/previewwindow.cpp cutefish-preview.desktop
+#: src/views/previewwindow.cpp properdesktop-preview.desktop
 msgid "Preview"
 msgstr "Pratonton"
 
@@ -128,7 +128,7 @@ msgstr "Salin Pautan"
 msgid "Select All"
 msgstr "Pilih Semua"
 
-#: src/views/previewwindow.cpp cutefish-preview.desktop
+#: src/views/previewwindow.cpp properdesktop-preview.desktop
 msgid "View images and PDF documents"
 msgstr "Lihat imej dan dokumen PDF"
 
@@ -373,6 +373,6 @@ msgstr "Terkini"
 msgid "Clear"
 msgstr "Kosongkan"
 
-#: cutefish-preview.desktop
+#: properdesktop-preview.desktop
 msgid "Image;Picture;Photo;Viewer;PDF;Document;"
 msgstr "Imej;Gambar;Foto;Pemapar;PDF;Dokumen;Image;Photo;"

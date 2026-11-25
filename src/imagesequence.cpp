@@ -12,7 +12,7 @@
 #include <map>
 #include <set>
 
-using namespace cutefish;
+using namespace properdesktop;
 namespace fs = std::filesystem;
 
 // The folder's images and `own`, sorted as the folder's videos are queued.

@@ -20,7 +20,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-using namespace cutefish;
+using namespace properdesktop;
 namespace fs = std::filesystem;
 
 namespace rotation {

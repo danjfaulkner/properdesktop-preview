@@ -18,9 +18,9 @@
 #include <png.h>
 #include <sys/stat.h>
 
-using cutefish::ui::Color;
-using cutefish::ui::Image;
-using cutefish::ui::ImageInfo;
+using properdesktop::ui::Color;
+using properdesktop::ui::Image;
+using properdesktop::ui::ImageInfo;
 
 // 16 x 8: red on the left half, blue on the right, a green top-left quarter
 // of the red, so every turn and mirror tells apart.
@@ -129,14 +129,14 @@ TEST(RotationTest, AJpegTurnsByItsOrientationAlone)
     TemporaryDir directory;
     for (const bool jfif : {false, true}) {
         const std::string path = writeJpeg(directory.filePath(jfif ? "jfif.jpg" : "plain.jpg"), jfif);
-        const std::string original = *cutefish::base::file::read(path);
+        const std::string original = *properdesktop::base::file::read(path);
         for (int turns = 1; turns <= 4; ++turns) {
             ASSERT_EQ(rotation::turn(path, "image/jpeg", 1), 0);
-            const std::string turned = *cutefish::base::file::read(path);
+            const std::string turned = *properdesktop::base::file::read(path);
             EXPECT_EQ(scanOf(turned), scanOf(original));
             if (jfif)
                 EXPECT_EQ(turned.compare(2, 2, "\xff\xe0"), 0);
-            const ImageInfo info = cutefish::ui::readImageInfo(path, "image/jpeg");
+            const ImageInfo info = properdesktop::ui::readImageInfo(path, "image/jpeg");
             EXPECT_EQ(info.width, turns % 2 ? 8 : 16);
             expectTurned(path, turns % 4);
         }
@@ -150,13 +150,13 @@ TEST(RotationTest, AnExifWithoutOrientationGetsOne)
     std::string exif("Exif\0\0II*\0\x08\0\0\0\x01\0", 16);
     exif += std::string("\x0f\x01\x02\0\x09\0\0\0\x1a\0\0\0", 12);
     exif += std::string(4, '\0');
-    exif += std::string("Cutefish\0", 9);
+    exif += std::string("ProperDesktop\0", 9);
     const std::string path = writeJpeg(directory.filePath("make.jpg"), false, exif);
-    const std::string original = *cutefish::base::file::read(path);
+    const std::string original = *properdesktop::base::file::read(path);
     ASSERT_EQ(rotation::turn(path, "image/jpeg", -1), 0);
-    const std::string turned = *cutefish::base::file::read(path);
+    const std::string turned = *properdesktop::base::file::read(path);
     EXPECT_EQ(scanOf(turned), scanOf(original));
-    EXPECT_NE(turned.find("Cutefish"), std::string::npos);
+    EXPECT_NE(turned.find("ProperDesktop"), std::string::npos);
     expectTurned(path, 3);
     ASSERT_EQ(rotation::turn(path, "image/jpeg", 1), 0);
     expectTurned(path, 0);
@@ -345,9 +345,9 @@ TEST(RotationTest, UnsafeChunksGoAndColourOnesStay)
 {
     TemporaryDir directory;
     const std::string path = writeRgbPng(directory.filePath("shot.png"), {true, true, 0});
-    ASSERT_TRUE(has(chunkNames(*cutefish::base::file::read(path)), "iDOT"));
+    ASSERT_TRUE(has(chunkNames(*properdesktop::base::file::read(path)), "iDOT"));
     ASSERT_EQ(rotation::turn(path, "image/png", 1), 0);
-    const std::vector<std::string> names = chunkNames(*cutefish::base::file::read(path));
+    const std::vector<std::string> names = chunkNames(*properdesktop::base::file::read(path));
     EXPECT_FALSE(has(names, "iDOT"));
     EXPECT_TRUE(has(names, "cICP"));
 }
@@ -358,13 +358,13 @@ TEST(RotationTest, AnExifAfterTheDataStaysAndIsSetUpright)
 {
     TemporaryDir directory;
     const std::string path = writeRgbPng(directory.filePath("exif.png"), {false, false, 2});
-    const std::vector<std::string> before = chunkNames(*cutefish::base::file::read(path));
+    const std::vector<std::string> before = chunkNames(*properdesktop::base::file::read(path));
     ASSERT_GT(std::find(before.begin(), before.end(), "eXIf"), std::find(before.begin(), before.end(), "IDAT"));
     const Image shown = Image::fromFile(path);
     ASSERT_EQ(shown.width(), 4);
     ASSERT_EQ(rotation::turn(path, "image/png", 1), 0);
 
-    const std::string turned = *cutefish::base::file::read(path);
+    const std::string turned = *properdesktop::base::file::read(path);
     EXPECT_TRUE(has(chunkNames(turned), "eXIf"));
     const size_t exif = turned.find("eXIf") + 4;
     // The orientation's value, 18 bytes into the TIFF data.

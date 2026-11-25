@@ -17,7 +17,7 @@
 #include <algorithm>
 #include <cmath>
 
-using namespace cutefish;
+using namespace properdesktop;
 using ui::rounding::centeredStart;
 
 static constexpr double kSmallSpacing = 6;

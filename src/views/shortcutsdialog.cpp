@@ -20,9 +20,9 @@
 #include <string>
 #include <vector>
 
-using namespace cutefish;
-using cutefish::i18n::tr;
-using cutefish::i18n::trNoop;
+using namespace properdesktop;
+using properdesktop::i18n::tr;
+using properdesktop::i18n::trNoop;
 using ui::rounding::centeredStart;
 
 static constexpr double kRowHeight = 44;

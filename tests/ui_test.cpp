@@ -30,7 +30,7 @@
 #include <functional>
 #include <unistd.h>
 
-using namespace cutefish::ui;
+using namespace properdesktop::ui;
 using namespace std::chrono_literals;
 
 namespace {
@@ -42,22 +42,22 @@ protected:
         : settings(directory.filePath("preview.conf"))
         , application(settings)
     {
-        previousId = cutefish::ui::Application::instance()->applicationId();
+        previousId = properdesktop::ui::Application::instance()->applicationId();
         // Window sizes are kept under the application id; one file per
         // process, as ctest runs the tests side by side.
         const std::string name = "preview-ui-test-" + std::to_string(getpid());
-        cutefish::ui::Application::instance()->setApplicationId("cutefish-" + name);
-        windowSizes = cutefish::base::paths::cutefishConfig(name);
+        properdesktop::ui::Application::instance()->setApplicationId("properdesktop-" + name);
+        windowSizes = properdesktop::base::paths::properdesktopConfig(name);
         std::filesystem::remove(windowSizes);
     }
 
     ~UiTest() override
     {
         std::filesystem::remove(windowSizes);
-        cutefish::ui::Application::instance()->setApplicationId(previousId);
+        properdesktop::ui::Application::instance()->setApplicationId(previousId);
     }
 
-    cutefish::base::EventLoop& loop() { return cutefish::ui::Application::instance()->loop(); }
+    properdesktop::base::EventLoop& loop() { return properdesktop::ui::Application::instance()->loop(); }
 
     PreviewWindow& onlyWindow()
     {
@@ -613,7 +613,7 @@ TEST_F(UiTest, ShortcutsScrollFromEveryEdge)
     ShortcutsDialog shortcuts(&parent);
     shortcuts.show();
     Window* dialog = nullptr;
-    for (Window* window : cutefish::ui::Application::instance()->windows()) {
+    for (Window* window : properdesktop::ui::Application::instance()->windows()) {
         if (window->transientParent() == &parent && !window->isHidden())
             dialog = window;
     }

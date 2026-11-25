@@ -9,7 +9,7 @@
 #include <string>
 #include <vector>
 
-namespace cutefish::ui {
+namespace properdesktop::ui {
 class DialogButton;
 class Label;
 class ThemeIcon;
@@ -17,7 +17,7 @@ class ThemeIcon;
 
 // A window without a file: how to open one, and the files opened recently;
 // scrolls when the window is too short for them.
-class WelcomePage : public cutefish::ui::ScrollView
+class WelcomePage : public properdesktop::ui::ScrollView
 {
 public:
     WelcomePage();
@@ -40,13 +40,13 @@ private:
     void layoutColumn(double pageWidth, double pageHeight);
 
     Column* m_column;
-    cutefish::ui::ThemeIcon* m_icon;
-    cutefish::ui::Label* m_title;
-    cutefish::ui::Label* m_subtitle;
-    cutefish::ui::DialogButton* m_open;
-    cutefish::ui::Label* m_recentLabel;
+    properdesktop::ui::ThemeIcon* m_icon;
+    properdesktop::ui::Label* m_title;
+    properdesktop::ui::Label* m_subtitle;
+    properdesktop::ui::DialogButton* m_open;
+    properdesktop::ui::Label* m_recentLabel;
     Clickable* m_clear;
-    cutefish::ui::Label* m_clearLabel;
-    cutefish::ui::View* m_card;
+    properdesktop::ui::Label* m_clearLabel;
+    properdesktop::ui::View* m_card;
     std::vector<RecentRow*> m_rows;
 };

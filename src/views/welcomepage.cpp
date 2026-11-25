@@ -17,8 +17,8 @@
 #include <cmath>
 #include <filesystem>
 
-using namespace cutefish;
-using cutefish::i18n::tr;
+using namespace properdesktop;
+using properdesktop::i18n::tr;
 using ui::rounding::centeredStart;
 
 static constexpr double kIconSize = 72;
@@ -186,7 +186,7 @@ WelcomePage::WelcomePage()
     setBottomCornerRadius(ui::Theme::current().windowRadius);
     setClipsChildren(true);
     m_column = setContent<Column>(*this);
-    m_icon = m_column->addChild<ui::ThemeIcon>("cutefish-preview", kIconSize);
+    m_icon = m_column->addChild<ui::ThemeIcon>("properdesktop-preview", kIconSize);
     m_title = m_column->addChild<ui::Label>();
     m_title->setFontSize(15 * 4.0 / 3);
     m_title->setWeight(500);

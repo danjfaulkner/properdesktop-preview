@@ -11,12 +11,12 @@
 #include <string>
 #include <vector>
 
-namespace cutefish::pdf {
+namespace properdesktop::pdf {
 struct Destination;
 struct OutlineItem;
 }
 
-namespace cutefish::ui {
+namespace properdesktop::ui {
 class ListView;
 }
 
@@ -26,7 +26,7 @@ class PdfDocument;
 // selection style of the Files sidebar; the current one is selected and
 // kept in view. For a PDF the items are its pages, numbered, and a document
 // with an outline gets Thumbnails and Contents at the top.
-class Sidebar : public cutefish::ui::View
+class Sidebar : public properdesktop::ui::View
 {
 public:
     // The Files sidebar's range, which a divider on its edge resizes within.
@@ -62,16 +62,16 @@ public:
     void activateContentsRow(size_t row);
     // The thumbnail and the number of a page row in sight, in the window;
     // empty when the row is not.
-    cutefish::ui::RectF pageThumbnailGeometry(int page, double ratio) const;
-    cutefish::ui::RectF pageNumberGeometry(int page) const;
-    cutefish::ui::RectF rowGeometry(int page) const;
+    properdesktop::ui::RectF pageThumbnailGeometry(int page, double ratio) const;
+    properdesktop::ui::RectF pageNumberGeometry(int page) const;
+    properdesktop::ui::RectF rowGeometry(int page) const;
 
     std::function<void(int index)> onActivated;
-    std::function<void(const cutefish::pdf::Destination& destination)> onDestinationActivated;
+    std::function<void(const properdesktop::pdf::Destination& destination)> onDestinationActivated;
 
 protected:
     void layout() override;
-    void paint(cutefish::ui::Painter& painter) override;
+    void paint(properdesktop::ui::Painter& painter) override;
 
 private:
     class Row;
@@ -79,7 +79,7 @@ private:
 
     struct OutlineEntry
     {
-        const cutefish::pdf::OutlineItem* item;
+        const properdesktop::pdf::OutlineItem* item;
         int depth;
     };
 
@@ -92,13 +92,13 @@ private:
     double numberHeight(double ratio);
 
     double m_headerHeight;
-    cutefish::ui::ListView* m_list;
-    cutefish::ui::ListView* m_outline;
+    properdesktop::ui::ListView* m_list;
+    properdesktop::ui::ListView* m_outline;
     std::vector<std::string> m_paths;
     PdfDocument* m_document = nullptr;
-    std::vector<cutefish::base::Subscription> m_subscriptions;
+    std::vector<properdesktop::base::Subscription> m_subscriptions;
     std::vector<OutlineEntry> m_outlineRows;
-    std::set<const cutefish::pdf::OutlineItem*> m_open;
+    std::set<const properdesktop::pdf::OutlineItem*> m_open;
     bool m_showsContents = false;
     int m_current = -1;
     // A page thumbnail's box, for the document's rows: the width less the
